@@ -32,5 +32,6 @@ The ChatBot code creates a dialogue where users can ask questions about some asp
 ## Project Schematic
 * Schematic of the GUI:
 <img src="images/project-schematic-1.png"/>
+
 * Schematic of the underlying chatbot logic:
 <img src="images/project-schematic-2.png"/>
