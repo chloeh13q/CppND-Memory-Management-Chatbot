@@ -42,9 +42,6 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE
-////
-
 // Copy constructor
 ChatBot::ChatBot(ChatBot &source) 
 {
@@ -78,13 +75,18 @@ ChatBot& ChatBot::operator=(ChatBot &source)
 ChatBot::ChatBot(ChatBot &&source) 
 {
     std::cout << "ChatBot Move Constructor" << std::endl;
-    _image = new wxBitmap();
-    *_image = *source._image;
+    // copy all stored attributes from source to new ChatBat constructor
+    _image = source._image;
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
-    source._image = nullptr;
     _chatLogic->SetChatbotHandle(this);
+
+    // invalidate source pointers
+    source._image = nullptr;
+    source._currentNode = nullptr;
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
 }
 
 // Move assignment operator
@@ -95,18 +97,20 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
         return *this;
     }
     delete _image;
-    _image = new wxBitmap();
-    *_image = *source._image;
+    // copy all stored attributes from source to new ChatBat constructor
+    _image = source._image;
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
-    source._image = nullptr;
     _chatLogic->SetChatbotHandle(this);
+
+    // invalidate source pointers
+    source._image = nullptr;
+    source._currentNode = nullptr;
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
     return *this;
 }
-
-////
-//// EOF STUDENT CODE
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {
